@@ -1,0 +1,44 @@
+#image {
+	background-image: url("../../static/images/background.jpg");
+	background-size: cover;
+	height: 100%;
+	color: white;
+}
+
+#forms{
+	width: 50%; 
+}
+
+.no-top {
+	margin-top: 0;
+}
+
+.left {
+	margin-left: 18%;
+}
+
+.top {
+	margin-top: 1%;
+}
+
+.big {
+	font-size: 3em;
+}
+
+.inputs {
+	background-color: rgba(1,3,37,0);
+	border: 1px solid blue;
+	margin-left: 10px;
+	display: inline-block !important;
+}
+
+.center {
+	margin: auto;
+	margin-top: 1%;
+	padding-right: 10%;
+	width: 0;
+}
+
+.button {
+	color: black;
+}
