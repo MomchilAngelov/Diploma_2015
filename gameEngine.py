@@ -161,7 +161,8 @@ class gameServer(threading.Thread):
 		self.sock.close()
 		self.close = 1
 
-
+#will not work on non-RPI system ;-;
+#nomusic
 class music_player(threading.Thread):
 	def __init__(self, filename):
 		threading.Thread.__init__(self)
