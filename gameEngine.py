@@ -46,8 +46,10 @@ def getAllGames(server):
 	if not mode == i+1:
 		url = address + "games/" + all_games[mode-1][1]
 		url = re.sub("\s+", "", url)
+		print(url)
 		file_name = "games/" + all_games[mode-1][0] + ".py"
 		urllib.request.urlretrieve(url, file_name)
+		print("Game download complete! You downloaded: {0} from {1}".format(file_name, url))
 
 def getAllFiles(path, directory):
 	os.chdir(directory)

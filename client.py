@@ -9,6 +9,10 @@ try:
 		print("Please input the port:")
 		input_port = input()
 		input_port = int(input_port)
+		if input_port == 1:
+			input_port = 12345
+		else:
+			input_port = 12346
 
 		print("Please input the data:")
 		input_str = input()
