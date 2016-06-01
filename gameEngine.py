@@ -15,7 +15,7 @@ import csv
 import json
 
 
-def getAllGames():
+def getAllGames(server):
 	print("Name of game")
 	print("================")
 	address = "http://localhost:80/python/"
@@ -31,23 +31,23 @@ def getAllGames():
 			i += 1
 			print(row[0])
 			all_games.append(row)
-		j = 0
-		while j < 3:
-				j += 1
-				try:
-					mode = int(input("Input:"))
-				except ValueError: 
-					print ('That\'s not a number!')
+		print("Exit")
+		while True:
+			try:
+				data, addr = server.sock.recvfrom(40)
+				data = data.decode()
+				mode = int(data)
+				if 1 <= mode < i+2: 
+					break
 				else:
-					if 1 <= mode < i+1:
-						break
-					else:
-						print ('Out of range. Try again')
-
-	url = address + "games/" + all_games[mode-1][1]
-	url = re.sub("\s+", "", url)
-	file_name = "games/" + all_games[mode-1][0] + ".py"
-	urllib.request.urlretrieve(url, file_name)
+					raise ValueError("Not in range!")
+			except ValueError as valerr:
+				print(valerr) 
+	if not mode == i+1:
+		url = address + "games/" + all_games[mode-1][1]
+		url = re.sub("\s+", "", url)
+		file_name = "games/" + all_games[mode-1][0] + ".py"
+		urllib.request.urlretrieve(url, file_name)
 
 def getAllFiles(path, directory):
 	os.chdir(directory)

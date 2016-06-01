@@ -66,11 +66,12 @@ class My_thread(threading.Thread):
 			os.system("clear")
 
 class My_other_thread(threading.Thread):
-	def __init__(self):
+	def __init__(self, server):
 		super().__init__()
+		self.server = server
 
 	def run(self):
-		gameEngine.getAllGames()
+		gameEngine.getAllGames(self.server)
 
 
 server = gameEngine.server()
@@ -104,7 +105,7 @@ while True:
 
 	os.system("clear")
 	if mode == 1:
-		my_script = My_other_thread()
+		my_script = My_other_thread(server)
 		my_script.start()
 		my_script.join()
 
