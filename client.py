@@ -6,7 +6,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 try:
 	while True:
-		print("Please input the port:")
+		print("Please input the port: 1 for 12345, anything other number for 12346")
 		input_port = input()
 		input_port = int(input_port)
 		if input_port == 1:
