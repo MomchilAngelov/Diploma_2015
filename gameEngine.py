@@ -18,7 +18,7 @@ import json
 def getAllGames(server):
 	print("Name of game")
 	print("================")
-	address = "http://localhost:80/python/"
+	address = "http://192.168.97.171:80/python/"
 	all_games = []
 	file = "games.csv"
 	url = address + file
@@ -29,9 +29,9 @@ def getAllGames(server):
 		reader = csv.reader(csvfile)
 		for row in reader:
 			i += 1
-			print(row[0])
+			print("{0} {1}".format(i, row[0]))
 			all_games.append(row)
-		print("Exit")
+		print("{0} Exit".format(i+1))
 		while True:
 			try:
 				data, addr = server.sock.recvfrom(40)
@@ -42,14 +42,17 @@ def getAllGames(server):
 				else:
 					raise ValueError("Not in range!")
 			except ValueError as valerr:
-				print(valerr) 
+				print(valerr)
 	if not mode == i+1:
 		url = address + "games/" + all_games[mode-1][1]
 		url = re.sub("\s+", "", url)
 		print(url)
 		file_name = "games/" + all_games[mode-1][0] + ".py"
 		urllib.request.urlretrieve(url, file_name)
+		os.system("clear")
 		print("Game download complete! You downloaded: {0} from {1}".format(file_name, url))
+	else:
+		os.system("clear")
 
 def getAllFiles(path, directory):
 	os.chdir(directory)
@@ -98,7 +101,7 @@ class server(threading.Thread):
 	def __init__(self, all_clients_handler = all_clients_handler()):
 		super().__init__()
 		self.ch = all_clients_handler
-		self.server_address = ('localhost', 12345)
+		self.server_address = ('192.168.97.171', 12345)
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 		self.sock.bind(self.server_address)
@@ -133,7 +136,7 @@ class gameServer(threading.Thread):
 	def __init__(self, all_clients_handler = all_clients_handler()):
 		super().__init__()
 		self.ch = all_clients_handler
-		self.server_address = ('localhost', 12346)
+		self.server_address = ('192.168.97.171', 12346)
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 		self.sock.bind(self.server_address)
@@ -149,12 +152,10 @@ class gameServer(threading.Thread):
 				if data:
 					self.ch.call_function_with_player(data, self.ch.return_user_by_name(addr))
 					self.sock.sendto(data.encode(),(addr))
-			except OSError:
-				sys.exit()
-
 			except Exception:
 				self.sock.shutdown(socket.SHUT_RDWR)
 				self.sock.close()
+				sys.exit()
 
 	def stop(self):
 		self.sock.shutdown(socket.SHUT_RDWR)

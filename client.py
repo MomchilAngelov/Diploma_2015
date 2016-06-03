@@ -8,7 +8,13 @@ try:
 	while True:
 		print("Please input the port: 1 for 12345, anything other number for 12346")
 		input_port = input()
-		input_port = int(input_port)
+		while True:	
+			try:
+				input_port = int(input_port)
+			except ValueError:
+				continue
+			break
+
 		if input_port == 1:
 			input_port = 12345
 		else:
@@ -16,8 +22,13 @@ try:
 
 		print("Please input the data:")
 		input_str = input()
-		input_str = str.encode(input_str)
+		while True:
+			try:
+				input_str = str.encode(input_str)
+			except ValueError:
+				pass
+			break
 
-		sock.sendto(input_str,('localhost', input_port))
+		sock.sendto(input_str,('192.168.97.171', input_port))
 finally:
 	sock.close()

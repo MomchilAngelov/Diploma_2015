@@ -3,7 +3,9 @@ import os
 import threading
 import gameEngine
 
-class My_thread(threading.Thread):
+os.system("clear")
+
+class RunGame(threading.Thread):
 	def __init__(self, directory):
 		super().__init__()
 		self.directory = directory
@@ -65,7 +67,7 @@ class My_thread(threading.Thread):
 											
 			os.system("clear")
 
-class My_other_thread(threading.Thread):
+class DownloadThread(threading.Thread):
 	def __init__(self, server):
 		super().__init__()
 		self.server = server
@@ -100,17 +102,20 @@ while True:
 					mode = 3
 					break
 
+		except ValueError:
+			pass
+
 		except OSError:
 			sys.exit()
 
 	os.system("clear")
 	if mode == 1:
-		my_script = My_other_thread(server)
+		my_script = DownloadThread(server)
 		my_script.start()
 		my_script.join()
 
 	if mode == 2:
-		my_script = My_thread(curr_directory)
+		my_script = RunGame(curr_directory)
 		my_script.start()
 		my_script.join()
 		
