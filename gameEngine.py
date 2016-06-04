@@ -15,6 +15,9 @@ import csv
 import json
 import serial
 
+ser = serial.Serial(port='/dev/ttyAMA0', baudrate = 9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,
+					bytesize=serial.EIGHTBITS, timeout=1)
+
 
 def getAllGames(server):
 	print("Name of game")
@@ -244,6 +247,7 @@ class PlayGround2D():
 		print("===Difference===")
 		self.clean_data = "\"{0};\"".format(self.clean_data)
 		print(self.clean_data)
+		ser.write(self.clean_data)
 		#it is string!
 						
 	def drawCentered(self, spriteRevolver,visionX=8,visionY=8):
