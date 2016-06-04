@@ -93,9 +93,8 @@ class myPlayersHandler(gameEngine.all_clients_handler):
 	def call_function_with_player(self, data, player):
 		global connected
 		connected = 1
-		print(data)
 		data = int(data)
-		print(data)
+		print("Got {0} from player {1}".format(data, player))
 		global snake
 		if data >= 315 and data <= 360 or data >= 0 and data <= 45: 
 			if snake.direction == 4:
@@ -135,7 +134,7 @@ snake_matrix = [[0,0,5],[0,1,5],[0,2,5]]
 
 pg = gameEngine.PlayGround2D(13,15)
 
-my_player_handler = myPlayersHandler(["Pesho","Sahso","Ivon","Ivan"])
+my_player_handler = myPlayersHandler(["Pesho","Sahso","Ivona","Ivan"])
 game_server = gameEngine.gameServer(my_player_handler)
 game_server.start()
 

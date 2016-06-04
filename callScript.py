@@ -38,7 +38,7 @@ class RunGame(threading.Thread):
 						except ValueError:
 							pass
 						else:
-							if 1<= mode < all_files_size + 1:
+							if 1 <= mode < all_files_size + 1:
 								break
 							else:
 								pass

@@ -29,6 +29,6 @@ try:
 				pass
 			break
 
-		sock.sendto(input_str,('192.168.97.171', input_port))
+		sock.sendto(input_str,('localhost', input_port))
 finally:
 	sock.close()

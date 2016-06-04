@@ -18,7 +18,7 @@ import json
 def getAllGames(server):
 	print("Name of game")
 	print("================")
-	address = "http://192.168.97.171:80/python/"
+	address = "http://localhost/python/"
 	all_games = []
 	file = "games.csv"
 	url = address + file
@@ -101,7 +101,7 @@ class server(threading.Thread):
 	def __init__(self, all_clients_handler = all_clients_handler()):
 		super().__init__()
 		self.ch = all_clients_handler
-		self.server_address = ('192.168.97.171', 12345)
+		self.server_address = ('localhost', 12345)
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 		self.sock.bind(self.server_address)
@@ -136,7 +136,7 @@ class gameServer(threading.Thread):
 	def __init__(self, all_clients_handler = all_clients_handler()):
 		super().__init__()
 		self.ch = all_clients_handler
-		self.server_address = ('192.168.97.171', 12346)
+		self.server_address = ('localhost', 12346)
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 		self.sock.bind(self.server_address)
@@ -241,7 +241,9 @@ class PlayGround2D():
 		for k in self.playfield:
 			print(k)
 		print("===Difference===")
+		self.clean_data = "\"{0};\"".format(self.clean_data)
 		print(self.clean_data)
+		#it is string!
 						
 	def drawCentered(self, spriteRevolver,visionX=8,visionY=8):
 		#The view field is 8:8+size of the sprite
