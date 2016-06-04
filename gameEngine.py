@@ -13,6 +13,7 @@ import urllib.request
 import sys
 import csv
 import json
+import serial
 
 
 def getAllGames(server):
