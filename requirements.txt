@@ -1,4 +1,1 @@
 deepdiff >= 1.1.0
-swagmaster123
-reakky
-123
